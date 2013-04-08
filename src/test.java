@@ -23,11 +23,7 @@ public class test implements IResource {
 			ReadXMLFile r = new ReadXMLFile();
 			String[][] data = r.returnTeewts();
 			System.out.println("Tweets converted");
-//			for(int i=0; i<100; i++){
-//				System.out.println(data[i][0]);
-//				System.out.println(data[i][1]);
-//				System.out.println(data[i][2]);
-//			}
+
 			final String [][] data2 = new String [] []
 			                                        {
 			                                            {
