@@ -23,40 +23,6 @@ public class test implements IResource {
 			ReadXMLFile r = new ReadXMLFile();
 			String[][] data = r.returnTeewts();
 			System.out.println("Tweets converted");
-
-			final String [][] data2 = new String [] []
-			                                        {
-			                                            {
-			                                                "http://en.wikipedia.org/wiki/Data_mining",
-			                                                "Data mining - Wikipedia, the free encyclopedia",
-			                                                "Article about knowledge-discovery in databases (KDD), the practice of automatically searching large stores of data for patterns."
-			                                            },
-
-			                                            {
-			                                                "http://www.ccsu.edu/datamining/resources.html",
-			                                                "CCSU - Data Mining",
-			                                                "A collection of Data Mining links edited by the Central Connecticut State University ... Graduate Certificate Program. Data Mining Resources. Resources. Groups ..."
-			                                            },
-
-			                                            {
-			                                                "http://www.kdnuggets.com/",
-			                                                "KDnuggets: Data Mining, Web Mining, and Knowledge Discovery",
-			                                                "Newsletter on the data mining and knowledge industries, offering information on data mining, knowledge discovery, text mining, and web mining software, courses, jobs, publications, and meetings."
-			                                            },
-
-			                                            {
-			                                                "http://en.wikipedia.org/wiki/Data-mining",
-			                                                "Data mining - Wikipedia, the free encyclopedia",
-			                                                "Data mining is considered a subfield within the Computer Science field of knowledge discovery. ... claim to perform \"data mining\" by automating the creation ..."
-			                                            },
-
-			                                            {
-			                                                "http://www.anderson.ucla.edu/faculty/jason.frand/teacher/technologies/palace/datamining.htm",
-			                                                "Data Mining: What is Data Mining?",
-			                                                "Outlines what knowledge discovery, the process of analyzing data from different perspectives and summarizing it into useful information, can do and how it works."
-			                                            },
-			                                        };
-
 			/* Prepare Carrot2 documents */
 			final ArrayList<Document> documents = new ArrayList<Document>();
 			for (String[] row : data) {
