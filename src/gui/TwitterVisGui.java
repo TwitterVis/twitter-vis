@@ -1,9 +1,11 @@
 package gui;
 
 
+import core.clusterObject;
 import core.clusterXml;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,21 +36,17 @@ public class TwitterVisGui extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        clusterTextField = new javax.swing.JTextField();
+        clusterScrollPane = new javax.swing.JScrollPane();
+        clusterTextArea = new javax.swing.JTextArea();
         fileUrlTextField = new javax.swing.JTextField();
         attachButton = new javax.swing.JButton();
         RunButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        clusterTextField.setEditable(false);
-        clusterTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clusterTextFieldActionPerformed(evt);
-            }
-        });
-        jScrollPane1.setViewportView(clusterTextField);
+        clusterTextArea.setColumns(20);
+        clusterTextArea.setRows(5);
+        clusterScrollPane.setViewportView(clusterTextArea);
 
         attachButton.setText("Browse...");
         attachButton.addActionListener(new java.awt.event.ActionListener() {
@@ -71,9 +69,9 @@ public class TwitterVisGui extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(clusterScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(fileUrlTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
+                        .addComponent(fileUrlTextField)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(attachButton)
                         .addGap(18, 18, 18)
@@ -89,7 +87,7 @@ public class TwitterVisGui extends javax.swing.JFrame {
                     .addComponent(attachButton)
                     .addComponent(RunButton))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
+                .addComponent(clusterScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -117,16 +115,21 @@ public class TwitterVisGui extends javax.swing.JFrame {
 
     private void RunButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RunButtonActionPerformed
         clusterXml cluster = new clusterXml();
+        ArrayList <clusterObject> clusterObjects = new ArrayList<clusterObject>();
+        
+        String fileUrl = fileUrlTextField.getText();
         try {
-            cluster.clusterXmlFile(fileUrlTextField.getText());
+            cluster.clusterXmlFile(fileUrl);
+            
+            for (clusterObject c : clusterObjects)
+            {
+                System.out.println(c.getTopic());
+                clusterTextArea.append(c.getTopic());
+            }
         } catch (IOException | ParserConfigurationException | SAXException e) {
             e.printStackTrace(System.out);
         }
     }//GEN-LAST:event_RunButtonActionPerformed
-
-    private void clusterTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clusterTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_clusterTextFieldActionPerformed
     
     /**
      * @param args the command line arguments
@@ -182,8 +185,8 @@ catch (javax.swing.UnsupportedLookAndFeelException ex) {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton RunButton;
     private javax.swing.JButton attachButton;
-    private javax.swing.JTextField clusterTextField;
+    private javax.swing.JScrollPane clusterScrollPane;
+    private javax.swing.JTextArea clusterTextArea;
     private javax.swing.JTextField fileUrlTextField;
-    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
