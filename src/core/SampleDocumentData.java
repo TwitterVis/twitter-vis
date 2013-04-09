@@ -1,3 +1,5 @@
+package core;
+
 
 /*
  * Carrot2 project.

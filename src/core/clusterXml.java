@@ -1,5 +1,10 @@
 
 
+
+package core;
+
+
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +23,7 @@ public class clusterXml implements IResource {
     {
      
     }
-        public void clusterXmlFile(String url) throws IOException, ParserConfigurationException, SAXException
+        public  ArrayList <clusterObject> clusterXmlFile(String url) throws IOException, ParserConfigurationException, SAXException
         {
             ReadXMLFile r = new ReadXMLFile();
             String[][] data = r.returnTeewts(url);
@@ -46,23 +51,50 @@ public class clusterXml implements IResource {
             final ProcessingResult byTopicClusters = controller.process(
                     documents, "  ", STCClusteringAlgorithm.class);
             final List<Cluster> clustersByTopic = byTopicClusters.getClusters();
-            System.out.println(clustersByTopic.get(0).toString());
+            
+             ArrayList <clusterObject> listClusters = new ArrayList <clusterObject>();
+             //get cluster
+             //get cluster details
+             //get all docs of that cluster
+             //for each doc get details
+             for(int i=0; i<clustersByTopic.size(); i++)
+             {
+                Cluster c = clustersByTopic.get(i);
+                String clusterLabel= c.getLabel();
+                List<Document> docs =clustersByTopic.get(i).getDocuments();
+                int numDocs = docs.size();
+                
+               ArrayList <documentObject> listDocuments = new ArrayList <documentObject>();
+                 for(int j=0; j<numDocs; j++)
+                 {
+                    Document d = docs.get(j);
+                    String docTitle = d.getTitle();
+                    String docSummary = d.getSummary();
+                    documentObject docObj= new documentObject(docTitle,docSummary);
+                    listDocuments.add(docObj);
+                 }
+                 clusterObject clusObj = new clusterObject(clusterLabel,numDocs,listDocuments);
+                 listClusters.add(clusObj);
+               
+             }
+             //test code
+//             clusterObject testClsuter = listClusters.get(1);
+//             testClsuter.printCluster();
+//             ArrayList <documentObject> listDocuments = testClsuter.documents;
+//             for (int i = 0; i <listDocuments.size(); i++) 
+//             {
+//                listDocuments.get(i).printDocument();
+//             }
+             
 
             /*
              * Perform clustering by domain. In this case query is not useful,
              * hence it is null.
              */
             System.out.println("clustering");
-//            final ProcessingResult byDomainClusters = controller.process(
-//            documents, null, ByUrlClusteringAlgorithm.class);
-//            final List<Cluster> clustersByDomain = byDomainClusters
-            //.getClusters();
-            // [[[end:clustering-document-list]]]
 
-            ConsoleFormatter.displayClusters(clustersByTopic);
-      
-           // ConsoleFormatter.displayClusters(clustersByDomain);
-            // return clustersByTopic;
+           // ConsoleFormatter.displayClusters(clustersByTopic);
+            return listClusters;
         }  
         }
 

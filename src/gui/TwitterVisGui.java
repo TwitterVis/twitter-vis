@@ -1,4 +1,7 @@
+package gui;
 
+
+import core.clusterXml;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -9,20 +12,16 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.carrot2.core.Cluster;
 import org.xml.sax.SAXException;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 /**
- *
- * @author Sean
+ * @author Sean Treacy
+ * @author Aaron Hastings
  */
-public class twitter_vis_gui extends javax.swing.JFrame {
+public class TwitterVisGui extends javax.swing.JFrame {
 
     /**
-     * Creates new form twitter_vis_gui
+     * Creates new form TwitterVisGui
      */
-    public twitter_vis_gui() {
+    public TwitterVisGui() {
         initComponents();
     }
 
@@ -66,31 +65,29 @@ public class twitter_vis_gui extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 503, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(fileUrlTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(attachButton))
-                    .addComponent(RunButton))
-                .addContainerGap(57, Short.MAX_VALUE))
+                    .addComponent(RunButton, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(fileUrlTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(attachButton))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(RunButton)))
-                .addContainerGap(42, Short.MAX_VALUE))
+                            .addComponent(attachButton)
+                            .addComponent(fileUrlTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 352, Short.MAX_VALUE)
+                        .addComponent(RunButton))
+                    .addComponent(jScrollPane1))
+                .addContainerGap())
         );
 
         pack();
@@ -100,11 +97,11 @@ public class twitter_vis_gui extends javax.swing.JFrame {
         try {
             attach();
         } catch (IOException ex) {
-            Logger.getLogger(twitter_vis_gui.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TwitterVisGui.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParserConfigurationException ex) {
-            Logger.getLogger(twitter_vis_gui.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TwitterVisGui.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SAXException ex) {
-            Logger.getLogger(twitter_vis_gui.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TwitterVisGui.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_attachButtonActionPerformed
 
@@ -112,15 +109,14 @@ public class twitter_vis_gui extends javax.swing.JFrame {
         JFileChooser fc = new JFileChooser();
         fc.showOpenDialog(null);
         File f = fc.getSelectedFile();
-         fileUrlTextField.setText(f.getAbsolutePath());  
+        fileUrlTextField.setText(f.getAbsolutePath());
     }
 
     private void RunButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RunButtonActionPerformed
         String url =fileUrlTextField.getText();
         clusterXml cluster = new clusterXml();
          try {
-                cluster.clusterXmlFile(url);
-            
+             cluster.clusterXmlFile(url);
         } catch (Exception e) {
              System.out.println("failed to find file");
         }
@@ -144,25 +140,25 @@ public static void main(String args[]) {
 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(twitter_vis_gui.class  
+            java.util.logging.Logger.getLogger(TwitterVisGui.class  
 
 .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } 
 
 catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(twitter_vis_gui.class  
+            java.util.logging.Logger.getLogger(TwitterVisGui.class  
 
 .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } 
 
 catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(twitter_vis_gui.class  
+            java.util.logging.Logger.getLogger(TwitterVisGui.class  
 
 .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } 
 
 catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(twitter_vis_gui.class  
+            java.util.logging.Logger.getLogger(TwitterVisGui.class  
 
 .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
@@ -171,7 +167,7 @@ catch (javax.swing.UnsupportedLookAndFeelException ex) {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new twitter_vis_gui().setVisible(true);
+                new TwitterVisGui().setVisible(true);
             }
         });
     }

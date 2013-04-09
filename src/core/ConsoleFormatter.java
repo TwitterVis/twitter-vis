@@ -1,3 +1,5 @@
+package core;
+
 
 /*
  * Carrot2 project.
@@ -85,7 +87,7 @@ public class ConsoleFormatter
         displayClusters(clusters, maxNumberOfDocumentsToShow,
             ClusterDetailsFormatter.INSTANCE);
     }
-//here
+
     public static void displayClusters(final Collection<Cluster> clusters,
         int maxNumberOfDocumentsToShow, ClusterDetailsFormatter clusterDetailsFormatter)
     {
@@ -111,7 +113,7 @@ public class ConsoleFormatter
         }
         System.out.println();
     }
-//here
+
     private static void displayCluster(final int level, String tag, Cluster cluster,
         int maxNumberOfDocumentsToShow, ClusterDetailsFormatter clusterDetailsFormatter)
     {
