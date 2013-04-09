@@ -46,6 +46,7 @@ public class clusterXml implements IResource {
             final ProcessingResult byTopicClusters = controller.process(
                     documents, "  ", STCClusteringAlgorithm.class);
             final List<Cluster> clustersByTopic = byTopicClusters.getClusters();
+            System.out.println(clustersByTopic.get(0).toString());
 
             /*
              * Perform clustering by domain. In this case query is not useful,
