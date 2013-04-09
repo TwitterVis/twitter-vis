@@ -30,9 +30,9 @@
                   <Group type="102" attributes="0">
                       <Component id="fileUrlTextField" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="attachButton" min="-2" max="-2" attributes="0"/>
+                      <Component id="browseButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="RunButton" min="-2" max="-2" attributes="0"/>
+                      <Component id="runButton" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -45,8 +45,8 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="fileUrlTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="attachButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="RunButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="browseButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="runButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="clusterScrollPane" pref="364" max="32767" attributes="0"/>
@@ -70,20 +70,20 @@
     </Container>
     <Component class="javax.swing.JTextField" name="fileUrlTextField">
     </Component>
-    <Component class="javax.swing.JButton" name="attachButton">
+    <Component class="javax.swing.JButton" name="browseButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Browse..."/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="attachButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="browseButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="RunButton">
+    <Component class="javax.swing.JButton" name="runButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Run"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RunButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="runButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

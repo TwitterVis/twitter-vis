@@ -3,6 +3,7 @@ package gui;
 
 import core.clusterObject;
 import core.clusterXml;
+import core.documentObject;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,8 +40,8 @@ public class TwitterVisGui extends javax.swing.JFrame {
         clusterScrollPane = new javax.swing.JScrollPane();
         clusterTextArea = new javax.swing.JTextArea();
         fileUrlTextField = new javax.swing.JTextField();
-        attachButton = new javax.swing.JButton();
-        RunButton = new javax.swing.JButton();
+        browseButton = new javax.swing.JButton();
+        runButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,17 +49,17 @@ public class TwitterVisGui extends javax.swing.JFrame {
         clusterTextArea.setRows(5);
         clusterScrollPane.setViewportView(clusterTextArea);
 
-        attachButton.setText("Browse...");
-        attachButton.addActionListener(new java.awt.event.ActionListener() {
+        browseButton.setText("Browse...");
+        browseButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                attachButtonActionPerformed(evt);
+                browseButtonActionPerformed(evt);
             }
         });
 
-        RunButton.setText("Run");
-        RunButton.addActionListener(new java.awt.event.ActionListener() {
+        runButton.setText("Run");
+        runButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RunButtonActionPerformed(evt);
+                runButtonActionPerformed(evt);
             }
         });
 
@@ -73,9 +74,9 @@ public class TwitterVisGui extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(fileUrlTextField)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(attachButton)
+                        .addComponent(browseButton)
                         .addGap(18, 18, 18)
-                        .addComponent(RunButton)))
+                        .addComponent(runButton)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -84,8 +85,8 @@ public class TwitterVisGui extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(fileUrlTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(attachButton)
-                    .addComponent(RunButton))
+                    .addComponent(browseButton)
+                    .addComponent(runButton))
                 .addGap(18, 18, 18)
                 .addComponent(clusterScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
                 .addContainerGap())
@@ -94,7 +95,7 @@ public class TwitterVisGui extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void attachButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_attachButtonActionPerformed
+    private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseButtonActionPerformed
         try {
             attach();
         } catch (IOException ex) {
@@ -104,7 +105,7 @@ public class TwitterVisGui extends javax.swing.JFrame {
         } catch (SAXException ex) {
             Logger.getLogger(TwitterVisGui.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_attachButtonActionPerformed
+    }//GEN-LAST:event_browseButtonActionPerformed
 
     public void attach() throws IOException, ParserConfigurationException, SAXException {
         JFileChooser fc = new JFileChooser();
@@ -113,23 +114,27 @@ public class TwitterVisGui extends javax.swing.JFrame {
         fileUrlTextField.setText(f.getAbsolutePath());
     }
 
-    private void RunButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RunButtonActionPerformed
+    private void runButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runButtonActionPerformed
         clusterXml cluster = new clusterXml();
         ArrayList <clusterObject> clusterObjects = new ArrayList<clusterObject>();
         
         String fileUrl = fileUrlTextField.getText();
         try {
-            cluster.clusterXmlFile(fileUrl);
+            clusterObjects = cluster.clusterXmlFile(fileUrl);
             
             for (clusterObject c : clusterObjects)
             {
-                System.out.println(c.getTopic());
-                clusterTextArea.append(c.getTopic());
+                clusterTextArea.append("\n ==== Cluster Topic: " + c.getTopic() + " ==== ");
+                clusterTextArea.append("\n ==== Number of documents in cluster: " + c.getNumDocuments() + " ==== \n");
+                for (documentObject d : c.documents)
+                {
+                    clusterTextArea.append(" -- Document -- \n" + d.getSnippet() + "\n\n");
+                }
             }
         } catch (IOException | ParserConfigurationException | SAXException e) {
             e.printStackTrace(System.out);
         }
-    }//GEN-LAST:event_RunButtonActionPerformed
+    }//GEN-LAST:event_runButtonActionPerformed
     
     /**
      * @param args the command line arguments
@@ -183,10 +188,10 @@ catch (javax.swing.UnsupportedLookAndFeelException ex) {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton RunButton;
-    private javax.swing.JButton attachButton;
+    private javax.swing.JButton browseButton;
     private javax.swing.JScrollPane clusterScrollPane;
     private javax.swing.JTextArea clusterTextArea;
     private javax.swing.JTextField fileUrlTextField;
+    private javax.swing.JButton runButton;
     // End of variables declaration//GEN-END:variables
 }
