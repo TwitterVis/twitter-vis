@@ -1,5 +1,9 @@
 
-
+/*
+ * Perform clustering by topic using the algorithim
+ * Reads xml file and parses to 2d string array
+ * Returns arraylist of clusters containing the tweets
+*/
 
 package core;
 
@@ -52,7 +56,7 @@ public class clusterXml implements IResource {
                     documents, "  ", STCClusteringAlgorithm.class);
             final List<Cluster> clustersByTopic = byTopicClusters.getClusters();
             
-             ArrayList <clusterObject> listClusters = new ArrayList <clusterObject>();
+             ArrayList <clusterObject> listClusters = new ArrayList <clusterObject>();//array to hold clusters
              //get cluster
              //get cluster details
              //get all docs of that cluster
@@ -64,7 +68,7 @@ public class clusterXml implements IResource {
                 List<Document> docs =clustersByTopic.get(i).getDocuments();
                 int numDocs = docs.size();
                 
-               ArrayList <documentObject> listDocuments = new ArrayList <documentObject>();
+               ArrayList <documentObject> listDocuments = new ArrayList <documentObject>();//array to hold tweets
                  for(int j=0; j<numDocs; j++)
                  {
                     Document d = docs.get(j);
@@ -77,22 +81,13 @@ public class clusterXml implements IResource {
                  listClusters.add(clusObj);
                
              }
-             //test code
-//             clusterObject testClsuter = listClusters.get(1);
-//             testClsuter.printCluster();
-//             ArrayList <documentObject> listDocuments = testClsuter.documents;
-//             for (int i = 0; i <listDocuments.size(); i++) 
-//             {
-//                listDocuments.get(i).printDocument();
-//             }
-             
 
             /*
              * Perform clustering by domain. In this case query is not useful,
              * hence it is null.
              */
             System.out.println("clustering");
-
+            //displays clsuters to console
            // ConsoleFormatter.displayClusters(clustersByTopic);
             return listClusters;
         }  

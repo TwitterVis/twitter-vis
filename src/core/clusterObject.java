@@ -4,8 +4,7 @@ package core;
 import java.util.ArrayList;
 
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ *wrapper class for clsuters of tweets 
  */
 
 /**
