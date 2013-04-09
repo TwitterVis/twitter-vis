@@ -1,22 +1,27 @@
+package gui;
 
+
+import core.clusterXml;
 import java.io.File;
+import java.io.IOException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+import javax.xml.parsers.ParserConfigurationException;
+import org.carrot2.core.Cluster;
+import org.xml.sax.SAXException;
 
 /**
- *
- * @author Sean
+ * @author Sean Treacy
+ * @author Aaron Hastings
  */
-public class twitter_vis_gui extends javax.swing.JFrame {
+public class TwitterVisGui extends javax.swing.JFrame {
 
     /**
-     * Creates new form twitter_vis_gui
+     * Creates new form TwitterVisGui
      */
-    public twitter_vis_gui() {
+    public TwitterVisGui() {
         initComponents();
     }
 
@@ -37,10 +42,8 @@ public class twitter_vis_gui extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        clusterTextField.setText("jTextField1");
+        clusterTextField.setEditable(false);
         jScrollPane1.setViewportView(clusterTextField);
-
-        fileUrlTextField.setText("jTextField2");
 
         attachButton.setText("Attach");
         attachButton.addActionListener(new java.awt.event.ActionListener() {
@@ -62,52 +65,66 @@ public class twitter_vis_gui extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 503, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(fileUrlTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(fileUrlTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(attachButton))
-                    .addComponent(RunButton))
-                .addContainerGap(37, Short.MAX_VALUE))
+                    .addComponent(RunButton, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(fileUrlTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(attachButton))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(RunButton)))
-                .addContainerGap(42, Short.MAX_VALUE))
+                            .addComponent(attachButton)
+                            .addComponent(fileUrlTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 352, Short.MAX_VALUE)
+                        .addComponent(RunButton))
+                    .addComponent(jScrollPane1))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void attachButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_attachButtonActionPerformed
-        JFileChooser fc= new JFileChooser();
-        fc.showOpenDialog(null);
-        File f= fc.getSelectedFile();
-        fileUrlTextField.setText(f.getAbsolutePath());
-        
+        try {
+            attach();
+        } catch (IOException ex) {
+            Logger.getLogger(TwitterVisGui.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(TwitterVisGui.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SAXException ex) {
+            Logger.getLogger(TwitterVisGui.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_attachButtonActionPerformed
 
-    private void RunButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RunButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_RunButtonActionPerformed
+    public void attach() throws IOException, ParserConfigurationException, SAXException {
+        JFileChooser fc = new JFileChooser();
+        fc.showOpenDialog(null);
+        File f = fc.getSelectedFile();
+        fileUrlTextField.setText(f.getAbsolutePath());
+    }
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
+    private void RunButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RunButtonActionPerformed
+        String url =fileUrlTextField.getText();
+        clusterXml cluster = new clusterXml();
+         try {
+             cluster.clusterXmlFile(url);
+        } catch (Exception e) {
+             System.out.println("failed to find file");
+        }
+    }//GEN-LAST:event_RunButtonActionPerformed
+/**
+ * @param args the command line arguments
+ */
+public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -118,26 +135,44 @@ public class twitter_vis_gui extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                }
+                
+
+}
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(twitter_vis_gui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(twitter_vis_gui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(twitter_vis_gui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(twitter_vis_gui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TwitterVisGui.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } 
+
+catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(TwitterVisGui.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } 
+
+catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(TwitterVisGui.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } 
+
+catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(TwitterVisGui.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new twitter_vis_gui().setVisible(true);
+                new TwitterVisGui().setVisible(true);
             }
         });
     }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton RunButton;
     private javax.swing.JButton attachButton;

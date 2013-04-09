@@ -1,3 +1,5 @@
+package core;
+
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.ParserConfigurationException;
@@ -19,9 +21,10 @@ public class ReadXMLFile{
 		
 	}
 
-	public String[][] returnTeewts() throws ParserConfigurationException, SAXException, IOException
+	public String[][] returnTeewts(String url) throws ParserConfigurationException, SAXException, IOException
 	{
 			File fXmlFile = new File("src//twitter.xml");
+                        //File fXmlFile = new File(url);
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			Document doc = dBuilder.parse(fXmlFile);
