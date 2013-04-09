@@ -42,6 +42,7 @@ public class TwitterVisGui extends javax.swing.JFrame {
         fileUrlTextField = new javax.swing.JTextField();
         browseButton = new javax.swing.JButton();
         runButton = new javax.swing.JButton();
+        algoComboBox = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,6 +64,8 @@ public class TwitterVisGui extends javax.swing.JFrame {
             }
         });
 
+        algoComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Lingo", "STC" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -76,6 +79,8 @@ public class TwitterVisGui extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(browseButton)
                         .addGap(18, 18, 18)
+                        .addComponent(algoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(runButton)))
                 .addContainerGap())
         );
@@ -86,7 +91,8 @@ public class TwitterVisGui extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(fileUrlTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(browseButton)
-                    .addComponent(runButton))
+                    .addComponent(runButton)
+                    .addComponent(algoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(clusterScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
                 .addContainerGap())
@@ -188,6 +194,7 @@ catch (javax.swing.UnsupportedLookAndFeelException ex) {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox algoComboBox;
     private javax.swing.JButton browseButton;
     private javax.swing.JScrollPane clusterScrollPane;
     private javax.swing.JTextArea clusterTextArea;
