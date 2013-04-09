@@ -14,48 +14,47 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ReadXMLFile{
-	
-	public ReadXMLFile()
-	{
-		
-	}
+public class ReadXMLFile {
 
-	public String[][] returnTeewts(String url) throws ParserConfigurationException, SAXException, IOException
-	{
-			File fXmlFile = new File("src//twitter.xml");
-                        //File fXmlFile = new File(url);
-			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-			Document doc = dBuilder.parse(fXmlFile);
-			String tweets[][] = new String[4000][3];
-			doc.getDocumentElement().normalize();
+    public ReadXMLFile()
+    {
+        
+    }
 
-			NodeList nList = doc.getElementsByTagName("document");
+    public String[][] returnTweets(String url) throws ParserConfigurationException, SAXException, IOException
+    {
+        File fXmlFile = new File("src//core//twitter.xml");
+        //File fXmlFile = new File(url);
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+        Document doc = dBuilder.parse(fXmlFile);
+        String tweets[][] = new String[4000][3];
+        doc.getDocumentElement().normalize();
 
-			for (int temp = 0; temp < nList.getLength(); temp++) {
+        NodeList nList = doc.getElementsByTagName("document");
 
-				Node nNode = nList.item(temp);
+        for (int temp = 0; temp < nList.getLength(); temp++)
+        {
+            Node nNode = nList.item(temp);
 
-				//System.out.println("\nCurrent Element :" + nNode.getNodeName());
+            //System.out.println("\nCurrent Element :" + nNode.getNodeName());
 
-				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+            if (nNode.getNodeType() == Node.ELEMENT_NODE)
+            {
+                Element eElement = (Element) nNode;
 
-					Element eElement = (Element) nNode;
+                // tweets.get(temp).add(eElement.getElementsByTagName("title").item(0).getTextContent());
+                // tweets.get(temp).add(eElement.getElementsByTagName("url").item(0).getTextContent());
+                // tweets.get(temp).add(eElement.getElementsByTagName("snippet").item(0).getTextContent());
+                tweets[temp][0] = (eElement.getElementsByTagName("title").item(0).getTextContent());
+                tweets[temp][1] = (eElement.getElementsByTagName("url").item(0).getTextContent());
+                tweets[temp][2] = (eElement.getElementsByTagName("snippet").item(0).getTextContent());
+            }
+        }
+        // System.out.println(tweets[0][0]);
+        // System.out.println(tweets[0][1]);
+        // System.out.println(tweets[0][2]);
 
-					//						tweets.get(temp).add(eElement.getElementsByTagName("title").item(0).getTextContent());
-					//						tweets.get(temp).add(eElement.getElementsByTagName("url").item(0).getTextContent());
-					//						tweets.get(temp).add(eElement.getElementsByTagName("snippet").item(0).getTextContent());
-					tweets[temp][0]=(eElement.getElementsByTagName("title").item(0).getTextContent());
-					tweets[temp][1]=(eElement.getElementsByTagName("url").item(0).getTextContent());
-					tweets[temp][2]=(eElement.getElementsByTagName("snippet").item(0).getTextContent());
-				}
-			}
-			//				System.out.println(tweets[0][0]);
-			//				System.out.println(tweets[0][1]);
-			//				System.out.println(tweets[0][2]);
-
-		return tweets;
-	}
+        return tweets;
+    }
 }
-

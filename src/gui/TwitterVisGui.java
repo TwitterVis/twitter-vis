@@ -43,9 +43,14 @@ public class TwitterVisGui extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         clusterTextField.setEditable(false);
+        clusterTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clusterTextFieldActionPerformed(evt);
+            }
+        });
         jScrollPane1.setViewportView(clusterTextField);
 
-        attachButton.setText("Attach");
+        attachButton.setText("Browse...");
         attachButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 attachButtonActionPerformed(evt);
@@ -65,28 +70,26 @@ public class TwitterVisGui extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 503, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(fileUrlTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(fileUrlTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(attachButton)
                         .addGap(18, 18, 18)
-                        .addComponent(attachButton))
-                    .addComponent(RunButton, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addComponent(RunButton)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(attachButton)
-                            .addComponent(fileUrlTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 352, Short.MAX_VALUE)
-                        .addComponent(RunButton))
-                    .addComponent(jScrollPane1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fileUrlTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(attachButton)
+                    .addComponent(RunButton))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -113,18 +116,22 @@ public class TwitterVisGui extends javax.swing.JFrame {
     }
 
     private void RunButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RunButtonActionPerformed
-        String url =fileUrlTextField.getText();
         clusterXml cluster = new clusterXml();
-         try {
-             cluster.clusterXmlFile(url);
-        } catch (Exception e) {
-             System.out.println("failed to find file");
+        try {
+            cluster.clusterXmlFile(fileUrlTextField.getText());
+        } catch (IOException | ParserConfigurationException | SAXException e) {
+            e.printStackTrace(System.out);
         }
     }//GEN-LAST:event_RunButtonActionPerformed
-/**
- * @param args the command line arguments
- */
-public static void main(String args[]) {
+
+    private void clusterTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clusterTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_clusterTextFieldActionPerformed
+    
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -135,7 +142,7 @@ public static void main(String args[]) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                
+
 
 }
             }
@@ -171,7 +178,6 @@ catch (javax.swing.UnsupportedLookAndFeelException ex) {
             }
         });
     }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton RunButton;
