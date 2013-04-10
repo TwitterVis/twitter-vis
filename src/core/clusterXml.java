@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.parsers.ParserConfigurationException;
-import org.carrot2.clustering.stc.STCClusteringAlgorithm;
+import org.carrot2.clustering.lingo.LingoClusteringAlgorithm;
 import org.carrot2.core.Cluster;
 import org.carrot2.core.Controller;
 import org.carrot2.core.ControllerFactory;
@@ -53,7 +53,7 @@ public class clusterXml implements IResource {
              * the documents.
              */
             final ProcessingResult byTopicClusters = controller.process(
-                    documents, "  ", STCClusteringAlgorithm.class);
+                    documents, "", LingoClusteringAlgorithm.class);
             final List<Cluster> clustersByTopic = byTopicClusters.getClusters();
             
              ArrayList <clusterObject> listClusters = new ArrayList <clusterObject>();//array to hold clusters

@@ -3,13 +3,11 @@ package core;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.ParserConfigurationException;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,12 +18,12 @@ public class ReadXMLFile {
     }
 
     public String[][] returnTweets(String url) throws ParserConfigurationException, SAXException, IOException {
-        File fXmlFile = new File("src//core//twitter.xml");
+        File fXmlFile = new File("src//core//tweets2.xml");
         //File fXmlFile = new File(url);
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         Document doc = dBuilder.parse(fXmlFile);
-        ArrayList<ArrayList<String>> arrayList = new ArrayList<ArrayList<String>>();
+        ArrayList<ArrayList<String>> arrayList = new ArrayList();
 
         doc.getDocumentElement().normalize();
 
@@ -37,7 +35,7 @@ public class ReadXMLFile {
             if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                 Element eElement = (Element) nNode;
 
-                ArrayList<String> innerList = new ArrayList<String>();
+                ArrayList<String> innerList = new ArrayList();
                 innerList.add((eElement.getElementsByTagName("title").item(0).getTextContent()));
                 innerList.add((eElement.getElementsByTagName("url").item(0).getTextContent()));
                 innerList.add((eElement.getElementsByTagName("snippet").item(0).getTextContent()));
