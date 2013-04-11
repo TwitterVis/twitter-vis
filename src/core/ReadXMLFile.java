@@ -3,58 +3,55 @@ package core;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.ParserConfigurationException;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class ReadXMLFile {
 
-    public ReadXMLFile()
-    {
-        
+    public ReadXMLFile() {
     }
 
-    public String[][] returnTweets(String url) throws ParserConfigurationException, SAXException, IOException
-    {
-        File fXmlFile = new File("src//core//twitter.xml");
+    public String[][] returnTweets(String url) throws ParserConfigurationException, SAXException, IOException {
+        File fXmlFile = new File("src//core//tweets2.xml");
         //File fXmlFile = new File(url);
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         Document doc = dBuilder.parse(fXmlFile);
-        String tweets[][] = new String[4000][3];
+        ArrayList<ArrayList<String>> arrayList = new ArrayList();
+
         doc.getDocumentElement().normalize();
 
         NodeList nList = doc.getElementsByTagName("document");
 
-        for (int temp = 0; temp < nList.getLength(); temp++)
-        {
+        for (int temp = 0; temp < nList.getLength(); temp++) {
             Node nNode = nList.item(temp);
 
-            //System.out.println("\nCurrent Element :" + nNode.getNodeName());
-
-            if (nNode.getNodeType() == Node.ELEMENT_NODE)
-            {
+            if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                 Element eElement = (Element) nNode;
 
-                // tweets.get(temp).add(eElement.getElementsByTagName("title").item(0).getTextContent());
-                // tweets.get(temp).add(eElement.getElementsByTagName("url").item(0).getTextContent());
-                // tweets.get(temp).add(eElement.getElementsByTagName("snippet").item(0).getTextContent());
-                tweets[temp][0] = (eElement.getElementsByTagName("title").item(0).getTextContent());
-                tweets[temp][1] = (eElement.getElementsByTagName("url").item(0).getTextContent());
-                tweets[temp][2] = (eElement.getElementsByTagName("snippet").item(0).getTextContent());
+                ArrayList<String> innerList = new ArrayList();
+                innerList.add((eElement.getElementsByTagName("title").item(0).getTextContent()));
+                innerList.add((eElement.getElementsByTagName("url").item(0).getTextContent()));
+                innerList.add((eElement.getElementsByTagName("snippet").item(0).getTextContent()));
+                arrayList.add(innerList);
             }
         }
-        // System.out.println(tweets[0][0]);
-        // System.out.println(tweets[0][1]);
-        // System.out.println(tweets[0][2]);
+        int size1 = arrayList.size();
+        System.out.println("array size: " + size1);
+        String tweets[][] = new String[size1][3];
+        for (int i = 0; i < size1; i++) {
+            ArrayList<String> innerList = arrayList.get(i);
+            tweets[i][0] = innerList.get(0);
+            tweets[i][1] = innerList.get(1);
+            tweets[i][2] = innerList.get(2);
 
+        }
         return tweets;
     }
 }

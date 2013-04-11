@@ -125,8 +125,13 @@ public class TwitterVisGui extends javax.swing.JFrame {
         ArrayList <clusterObject> clusterObjects = new ArrayList<clusterObject>();
         
         String fileUrl = fileUrlTextField.getText();
+
         try {
             clusterObjects = cluster.clusterXmlFile(fileUrl);
+            int numClusters= clusterObjects.size();
+            clusterTextArea.append("\n ==== Number Clusters: " + numClusters + " ==== ");
+            clusterTextArea.append("\n*******************************************");
+             clusterTextArea.append("\n");
             
             for (clusterObject c : clusterObjects)
             {
