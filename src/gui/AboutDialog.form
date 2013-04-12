@@ -84,7 +84,7 @@
             </Property>
             <Property name="lineWrap" type="boolean" value="true"/>
             <Property name="rows" type="int" value="5"/>
-            <Property name="text" type="java.lang.String" value="&#xa;TweetVis is a Twitter visualisation project designed and built by:&#xa;&#xa;Ross Doherty&#xa;Aaron Hastings&#xa;Matt McGrath&#xa;Sean Treacy"/>
+            <Property name="text" type="java.lang.String" value="&#xa;TweetVis is a Twitter visualisation project proudly designed and built by:&#xa;&#xa;Ross Doherty&#xa;Aaron Hastings&#xa;Matt McGrath&#xa;Sean Treacy"/>
             <Property name="wrapStyleWord" type="boolean" value="true"/>
           </Properties>
         </Component>

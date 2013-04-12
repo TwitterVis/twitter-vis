@@ -44,7 +44,7 @@ public class AboutDialog extends javax.swing.JDialog {
         aboutTextArea.setFont(new java.awt.Font("Open Sans", 0, 13)); // NOI18N
         aboutTextArea.setLineWrap(true);
         aboutTextArea.setRows(5);
-        aboutTextArea.setText("\nTweetVis is a Twitter visualisation project designed and built by:\n\nRoss Doherty\nAaron Hastings\nMatt McGrath\nSean Treacy");
+        aboutTextArea.setText("\nTweetVis is a Twitter visualisation project proudly designed and built by:\n\nRoss Doherty\nAaron Hastings\nMatt McGrath\nSean Treacy");
         aboutTextArea.setWrapStyleWord(true);
         aboutScrollPane.setViewportView(aboutTextArea);
 
