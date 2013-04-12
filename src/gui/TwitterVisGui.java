@@ -186,7 +186,9 @@ public class TwitterVisGui extends javax.swing.JFrame {
     }
 
     private void runButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runButtonActionPerformed
-        clusterXml cluster = new clusterXml();
+        clusterTextArea.setText("");
+        String algo = algoComboBox.getSelectedItem().toString();
+        clusterXml cluster = new clusterXml(algo);
         ArrayList <clusterObject> clusterObjects = new ArrayList<clusterObject>();
         
         String fileUrl = fileUrlTextField.getText();

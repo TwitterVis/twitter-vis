@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.xml.parsers.ParserConfigurationException;
 import org.carrot2.clustering.lingo.LingoClusteringAlgorithm;
+import org.carrot2.clustering.stc.STCClusteringAlgorithm;
 import org.carrot2.core.Cluster;
 import org.carrot2.core.Controller;
 import org.carrot2.core.ControllerFactory;
@@ -22,10 +23,10 @@ import org.carrot2.core.ProcessingResult;
 import org.xml.sax.SAXException;
 
 public class clusterXml implements IResource {
-    
-    public clusterXml()
+    public String algorithim;
+    public clusterXml(String a)
     {
-     
+     algorithim=a;
     }
         public  ArrayList <clusterObject> clusterXmlFile(String url) throws IOException, ParserConfigurationException, SAXException
         {
@@ -52,8 +53,17 @@ public class clusterXml implements IResource {
              * take advantage of the original query, so we provide it along with
              * the documents.
              */
-            final ProcessingResult byTopicClusters = controller.process(
-                    documents, "", LingoClusteringAlgorithm.class);
+            //String algortihim=algoComboBox.
+             ProcessingResult byTopicClusters;
+            if(algorithim.equals("Lingo"))
+            {
+                byTopicClusters = controller.process(
+                    documents, "", LingoClusteringAlgorithm.class); 
+            }
+            else
+                 byTopicClusters = controller.process(
+                    documents, "", STCClusteringAlgorithm.class);
+            
             final List<Cluster> clustersByTopic = byTopicClusters.getClusters();
             
              ArrayList <clusterObject> listClusters = new ArrayList <clusterObject>();//array to hold clusters
