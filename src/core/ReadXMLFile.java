@@ -18,7 +18,7 @@ public class ReadXMLFile {
     }
 
     public String[][] returnTweets(String url) throws ParserConfigurationException, SAXException, IOException {
-        File fXmlFile = new File("src//core//tweets2.xml");
+        File fXmlFile = new File("src//core//master.xml");
         //File fXmlFile = new File(url);
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
