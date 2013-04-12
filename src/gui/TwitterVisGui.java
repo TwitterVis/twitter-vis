@@ -10,11 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.xml.parsers.ParserConfigurationException;
 import org.carrot2.core.Cluster;
 import org.xml.sax.SAXException;
-
 /**
  * @author Sean Treacy
  * @author Aaron Hastings
@@ -43,6 +45,11 @@ public class TwitterVisGui extends javax.swing.JFrame {
         browseButton = new javax.swing.JButton();
         runButton = new javax.swing.JButton();
         algoComboBox = new javax.swing.JComboBox();
+        menuBar = new javax.swing.JMenuBar();
+        fileMenu = new javax.swing.JMenu();
+        exitMenuItem = new javax.swing.JMenuItem();
+        aboutMenu = new javax.swing.JMenu();
+        aboutTwitterVisMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,6 +72,37 @@ public class TwitterVisGui extends javax.swing.JFrame {
         });
 
         algoComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Lingo", "STC" }));
+
+        fileMenu.setText("File");
+
+        exitMenuItem.setText("Exit");
+        exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitMenuItemActionPerformed(evt);
+            }
+        });
+        fileMenu.add(exitMenuItem);
+
+        menuBar.add(fileMenu);
+
+        aboutMenu.setText("About");
+        aboutMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aboutMenuActionPerformed(evt);
+            }
+        });
+
+        aboutTwitterVisMenuItem.setText("About TwitterVis");
+        aboutTwitterVisMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aboutTwitterVisMenuItemActionPerformed(evt);
+            }
+        });
+        aboutMenu.add(aboutTwitterVisMenuItem);
+
+        menuBar.add(aboutMenu);
+
+        setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -94,7 +132,7 @@ public class TwitterVisGui extends javax.swing.JFrame {
                     .addComponent(runButton)
                     .addComponent(algoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(clusterScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
+                .addComponent(clusterScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -142,10 +180,32 @@ public class TwitterVisGui extends javax.swing.JFrame {
                     clusterTextArea.append(" -- Document -- \n" + d.getSnippet() + "\n\n");
                 }
             }
-        } catch (IOException | ParserConfigurationException | SAXException e) {
-            e.printStackTrace(System.out);
+        } catch (IOException ioe) {
+            ioe.printStackTrace(System.out);
+        } catch (ParserConfigurationException pce) {
+            pce.printStackTrace(System.out);
+        } catch (SAXException saxe) {
+            saxe.printStackTrace(System.out);
         }
     }//GEN-LAST:event_runButtonActionPerformed
+
+    private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_exitMenuItemActionPerformed
+
+    private void aboutMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_aboutMenuActionPerformed
+
+    private void aboutTwitterVisMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutTwitterVisMenuItemActionPerformed
+//        JPanel aboutPanel = new JPanel();
+//        aboutPanel.setSize(500, 500);
+//        aboutPanel.setVisible(true);
+        
+        JDialog aboutDialog = new JDialog();
+        aboutDialog.setSize(500, 500);
+        aboutDialog.setVisible(true);
+    }//GEN-LAST:event_aboutTwitterVisMenuItemActionPerformed
     
     /**
      * @param args the command line arguments
@@ -199,11 +259,16 @@ catch (javax.swing.UnsupportedLookAndFeelException ex) {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu aboutMenu;
+    private javax.swing.JMenuItem aboutTwitterVisMenuItem;
     private javax.swing.JComboBox algoComboBox;
     private javax.swing.JButton browseButton;
     private javax.swing.JScrollPane clusterScrollPane;
     private javax.swing.JTextArea clusterTextArea;
+    private javax.swing.JMenuItem exitMenuItem;
+    private javax.swing.JMenu fileMenu;
     private javax.swing.JTextField fileUrlTextField;
+    private javax.swing.JMenuBar menuBar;
     private javax.swing.JButton runButton;
     // End of variables declaration//GEN-END:variables
 }
