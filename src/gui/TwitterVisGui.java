@@ -46,6 +46,7 @@ public class TwitterVisGui extends javax.swing.JFrame {
         runButton = new javax.swing.JButton();
         algoComboBox = new javax.swing.JComboBox();
         algoLabel = new javax.swing.JLabel();
+        searchQueryTextField = new javax.swing.JTextField();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         exitMenuItem = new javax.swing.JMenuItem();
@@ -59,20 +60,10 @@ public class TwitterVisGui extends javax.swing.JFrame {
         clusterScrollPane.setViewportView(clusterTextArea);
 
         fileUrlTextField.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
-        fileUrlTextField.setText("Cluster by query or choose a file using \"Browse...\"");
-        fileUrlTextField.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                fileUrlTextFieldMouseClicked(evt);
-            }
-        });
+        fileUrlTextField.setText("Choose a file by clicking \"Browse...\"");
         fileUrlTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fileUrlTextFieldActionPerformed(evt);
-            }
-        });
-        fileUrlTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                fileUrlTextFieldFocusLost(evt);
             }
         });
 
@@ -83,7 +74,7 @@ public class TwitterVisGui extends javax.swing.JFrame {
             }
         });
 
-        runButton.setText("Run");
+        runButton.setText("    Run    ");
         runButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 runButtonActionPerformed(evt);
@@ -94,6 +85,24 @@ public class TwitterVisGui extends javax.swing.JFrame {
 
         algoLabel.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         algoLabel.setText("Algorithm");
+
+        searchQueryTextField.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
+        searchQueryTextField.setText("Enter a search query...");
+        searchQueryTextField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                searchQueryTextFieldMouseClicked(evt);
+            }
+        });
+        searchQueryTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchQueryTextFieldActionPerformed(evt);
+            }
+        });
+        searchQueryTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                searchQueryTextFieldFocusLost(evt);
+            }
+        });
 
         fileMenu.setText("File");
 
@@ -134,11 +143,14 @@ public class TwitterVisGui extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(clusterScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(fileUrlTextField)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(browseButton)
-                        .addGap(18, 18, 18)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(searchQueryTextField)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(fileUrlTextField)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(browseButton)))
+                        .addGap(102, 102, 102)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(algoLabel)
                             .addGroup(layout.createSequentialGroup()
@@ -150,16 +162,19 @@ public class TwitterVisGui extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(algoLabel)
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(fileUrlTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(browseButton))
+                    .addComponent(algoLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(searchQueryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(algoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(fileUrlTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(runButton)
-                    .addComponent(browseButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(clusterScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(runButton))
+                .addGap(125, 125, 125)
+                .addComponent(clusterScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -240,15 +255,19 @@ public class TwitterVisGui extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_fileUrlTextFieldActionPerformed
 
-    private void fileUrlTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fileUrlTextFieldFocusLost
-        if (fileUrlTextField.getText().equals(""))
-            fileUrlTextField.setText("Cluster by query or choose a file using \"Browse...\"");
-    }//GEN-LAST:event_fileUrlTextFieldFocusLost
+    private void searchQueryTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchQueryTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchQueryTextFieldActionPerformed
 
-    private void fileUrlTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fileUrlTextFieldMouseClicked
-        if (fileUrlTextField.getText().equals("Cluster by query or choose a file using \"Browse...\""))
-            fileUrlTextField.setText("");
-    }//GEN-LAST:event_fileUrlTextFieldMouseClicked
+    private void searchQueryTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchQueryTextFieldMouseClicked
+        if (searchQueryTextField.getText().equals("Enter a search query..."))
+            searchQueryTextField.setText("");
+    }//GEN-LAST:event_searchQueryTextFieldMouseClicked
+
+    private void searchQueryTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchQueryTextFieldFocusLost
+        if (searchQueryTextField.getText().equals(""))
+            searchQueryTextField.setText("Enter a search query...");
+    }//GEN-LAST:event_searchQueryTextFieldFocusLost
     
     /**
      * @param args the command line arguments
@@ -314,5 +333,6 @@ catch (javax.swing.UnsupportedLookAndFeelException ex) {
     private javax.swing.JTextField fileUrlTextField;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JButton runButton;
+    private javax.swing.JTextField searchQueryTextField;
     // End of variables declaration//GEN-END:variables
 }
