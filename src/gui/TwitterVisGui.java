@@ -45,6 +45,7 @@ public class TwitterVisGui extends javax.swing.JFrame {
         browseButton = new javax.swing.JButton();
         runButton = new javax.swing.JButton();
         algoComboBox = new javax.swing.JComboBox();
+        algoLabel = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         exitMenuItem = new javax.swing.JMenuItem();
@@ -56,6 +57,24 @@ public class TwitterVisGui extends javax.swing.JFrame {
         clusterTextArea.setColumns(20);
         clusterTextArea.setRows(5);
         clusterScrollPane.setViewportView(clusterTextArea);
+
+        fileUrlTextField.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
+        fileUrlTextField.setText("Cluster by query or choose a file using \"Browse...\"");
+        fileUrlTextField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                fileUrlTextFieldMouseClicked(evt);
+            }
+        });
+        fileUrlTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fileUrlTextFieldActionPerformed(evt);
+            }
+        });
+        fileUrlTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                fileUrlTextFieldFocusLost(evt);
+            }
+        });
 
         browseButton.setText("Browse...");
         browseButton.addActionListener(new java.awt.event.ActionListener() {
@@ -72,6 +91,9 @@ public class TwitterVisGui extends javax.swing.JFrame {
         });
 
         algoComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Lingo", "STC" }));
+
+        algoLabel.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        algoLabel.setText("Algorithm");
 
         fileMenu.setText("File");
 
@@ -117,22 +139,27 @@ public class TwitterVisGui extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(browseButton)
                         .addGap(18, 18, 18)
-                        .addComponent(algoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(runButton)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(algoLabel)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(algoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(runButton)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(algoLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(algoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(fileUrlTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(browseButton)
                     .addComponent(runButton)
-                    .addComponent(algoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(clusterScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
+                    .addComponent(browseButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(clusterScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -206,6 +233,20 @@ public class TwitterVisGui extends javax.swing.JFrame {
         aboutDialog.setSize(500, 500);
         aboutDialog.setVisible(true);
     }//GEN-LAST:event_aboutTwitterVisMenuItemActionPerformed
+
+    private void fileUrlTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileUrlTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fileUrlTextFieldActionPerformed
+
+    private void fileUrlTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fileUrlTextFieldFocusLost
+        if (fileUrlTextField.getText().equals(""))
+            fileUrlTextField.setText("Cluster by query or choose a file using \"Browse...\"");
+    }//GEN-LAST:event_fileUrlTextFieldFocusLost
+
+    private void fileUrlTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fileUrlTextFieldMouseClicked
+        if (fileUrlTextField.getText().equals("Cluster by query or choose a file using \"Browse...\""))
+            fileUrlTextField.setText("");
+    }//GEN-LAST:event_fileUrlTextFieldMouseClicked
     
     /**
      * @param args the command line arguments
@@ -262,6 +303,7 @@ catch (javax.swing.UnsupportedLookAndFeelException ex) {
     private javax.swing.JMenu aboutMenu;
     private javax.swing.JMenuItem aboutTwitterVisMenuItem;
     private javax.swing.JComboBox algoComboBox;
+    private javax.swing.JLabel algoLabel;
     private javax.swing.JButton browseButton;
     private javax.swing.JScrollPane clusterScrollPane;
     private javax.swing.JTextArea clusterTextArea;
