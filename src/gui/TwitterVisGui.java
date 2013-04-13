@@ -39,14 +39,16 @@ public class TwitterVisGui extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        clusterScrollPane = new javax.swing.JScrollPane();
-        clusterTextArea = new javax.swing.JTextArea();
         fileUrlTextField = new javax.swing.JTextField();
         browseButton = new javax.swing.JButton();
         runButton = new javax.swing.JButton();
         algoComboBox = new javax.swing.JComboBox();
         algoLabel = new javax.swing.JLabel();
         searchQueryTextField = new javax.swing.JTextField();
+        clusterTabbedPane = new javax.swing.JTabbedPane();
+        rawOutputScrollPane = new javax.swing.JScrollPane();
+        rawOutputTextArea = new javax.swing.JTextArea();
+        graphScrollPane = new javax.swing.JScrollPane();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         exitMenuItem = new javax.swing.JMenuItem();
@@ -54,15 +56,6 @@ public class TwitterVisGui extends javax.swing.JFrame {
         aboutMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        clusterTextArea.setEditable(false);
-        clusterTextArea.setColumns(20);
-        clusterTextArea.setLineWrap(true);
-        clusterTextArea.setRows(5);
-        clusterTextArea.setWrapStyleWord(true);
-        clusterScrollPane.setViewportView(clusterTextArea);
-        javax.swing.text.DefaultCaret caret = (javax.swing.text.DefaultCaret) clusterTextArea.getCaret();
-        caret.setUpdatePolicy(javax.swing.text.DefaultCaret.NEVER_UPDATE);
 
         fileUrlTextField.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
         fileUrlTextField.setText("Choose a file by clicking \"Browse...\"");
@@ -72,7 +65,7 @@ public class TwitterVisGui extends javax.swing.JFrame {
             }
         });
 
-        browseButton.setFont(new java.awt.Font("Open Sans", 0, 15)); // NOI18N
+        browseButton.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
         browseButton.setText("Browse...");
         browseButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,7 +73,7 @@ public class TwitterVisGui extends javax.swing.JFrame {
             }
         });
 
-        runButton.setFont(new java.awt.Font("Open Sans", 0, 15)); // NOI18N
+        runButton.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
         runButton.setText("    Run    ");
         runButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,7 +81,7 @@ public class TwitterVisGui extends javax.swing.JFrame {
             }
         });
 
-        algoComboBox.setFont(new java.awt.Font("Open Sans", 0, 15)); // NOI18N
+        algoComboBox.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
         algoComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Lingo", "STC" }));
 
         algoLabel.setFont(new java.awt.Font("Open Sans", 1, 14)); // NOI18N
@@ -112,10 +105,25 @@ public class TwitterVisGui extends javax.swing.JFrame {
             }
         });
 
-        fileMenu.setText("File");
-        fileMenu.setFont(new java.awt.Font("Open Sans", 0, 15)); // NOI18N
+        clusterTabbedPane.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
 
-        exitMenuItem.setFont(new java.awt.Font("Open Sans", 0, 15)); // NOI18N
+        rawOutputTextArea.setEditable(false);
+        rawOutputTextArea.setColumns(20);
+        rawOutputTextArea.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
+        rawOutputTextArea.setLineWrap(true);
+        rawOutputTextArea.setRows(5);
+        rawOutputTextArea.setWrapStyleWord(true);
+        rawOutputScrollPane.setViewportView(rawOutputTextArea);
+        javax.swing.text.DefaultCaret caret = (javax.swing.text.DefaultCaret) rawOutputTextArea.getCaret();
+        caret.setUpdatePolicy(javax.swing.text.DefaultCaret.NEVER_UPDATE);
+
+        clusterTabbedPane.addTab("Raw Output", rawOutputScrollPane);
+        clusterTabbedPane.addTab("Graph", graphScrollPane);
+
+        fileMenu.setText("File");
+        fileMenu.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
+
+        exitMenuItem.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
         exitMenuItem.setText("Exit");
         exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -127,14 +135,14 @@ public class TwitterVisGui extends javax.swing.JFrame {
         menuBar.add(fileMenu);
 
         helpMenu.setText("Help");
-        helpMenu.setFont(new java.awt.Font("Open Sans", 0, 15)); // NOI18N
+        helpMenu.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
         helpMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 helpMenuActionPerformed(evt);
             }
         });
 
-        aboutMenuItem.setFont(new java.awt.Font("Open Sans", 0, 15)); // NOI18N
+        aboutMenuItem.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
         aboutMenuItem.setText("About TweetVis");
         aboutMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -151,13 +159,14 @@ public class TwitterVisGui extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(clusterTabbedPane)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(fileUrlTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                                .addComponent(fileUrlTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(browseButton))
                             .addComponent(searchQueryTextField))
@@ -167,8 +176,7 @@ public class TwitterVisGui extends javax.swing.JFrame {
                                 .addComponent(algoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(runButton))
-                            .addComponent(algoLabel)))
-                    .addComponent(clusterScrollPane))
+                            .addComponent(algoLabel))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -186,7 +194,7 @@ public class TwitterVisGui extends javax.swing.JFrame {
                     .addComponent(algoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(runButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(clusterScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
+                .addComponent(clusterTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -213,7 +221,7 @@ public class TwitterVisGui extends javax.swing.JFrame {
     }
 
     private void runButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runButtonActionPerformed
-        clusterTextArea.setText("");
+        rawOutputTextArea.setText("");
         String algo = algoComboBox.getSelectedItem().toString();
         clusterXml cluster = new clusterXml(algo);
         ArrayList <clusterObject> clusterObjects = new ArrayList<clusterObject>();
@@ -222,17 +230,17 @@ public class TwitterVisGui extends javax.swing.JFrame {
         try {
             clusterObjects = cluster.clusterXmlFile(fileUrl);
             int numClusters= clusterObjects.size();
-            clusterTextArea.append("\n ==== Number Clusters: " + numClusters + " ==== ");
-            clusterTextArea.append("\n*******************************************");
-             clusterTextArea.append("\n");
+            rawOutputTextArea.append("\n ==== Number Clusters: " + numClusters + " ==== ");
+            rawOutputTextArea.append("\n*******************************************");
+             rawOutputTextArea.append("\n");
             
             for (clusterObject c : clusterObjects)
             {
-                clusterTextArea.append("\n ==== Cluster Topic: " + c.getTopic() + " ==== ");
-                clusterTextArea.append("\n ==== Number of documents in cluster: " + c.getNumDocuments() + " ==== \n");
+                rawOutputTextArea.append("\n ==== Cluster Topic: " + c.getTopic() + " ==== ");
+                rawOutputTextArea.append("\n ==== Number of documents in cluster: " + c.getNumDocuments() + " ==== \n");
                 for (documentObject d : c.documents)
                 {
-                    clusterTextArea.append(" -- Document -- \n" + d.getSnippet() + "\n\n");
+                    rawOutputTextArea.append(" -- Document -- \n" + d.getSnippet() + "\n\n");
                 }
             }
         } catch (IOException ioe) {
@@ -331,13 +339,15 @@ catch (javax.swing.UnsupportedLookAndFeelException ex) {
     private javax.swing.JComboBox algoComboBox;
     private javax.swing.JLabel algoLabel;
     private javax.swing.JButton browseButton;
-    private javax.swing.JScrollPane clusterScrollPane;
-    private javax.swing.JTextArea clusterTextArea;
+    private javax.swing.JTabbedPane clusterTabbedPane;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JTextField fileUrlTextField;
+    private javax.swing.JScrollPane graphScrollPane;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JScrollPane rawOutputScrollPane;
+    private javax.swing.JTextArea rawOutputTextArea;
     private javax.swing.JButton runButton;
     private javax.swing.JTextField searchQueryTextField;
     // End of variables declaration//GEN-END:variables
