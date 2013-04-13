@@ -50,7 +50,7 @@ public class TwitterVisGui extends javax.swing.JFrame {
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         exitMenuItem = new javax.swing.JMenuItem();
-        aboutMenu = new javax.swing.JMenu();
+        helpMenu = new javax.swing.JMenu();
         aboutMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -61,6 +61,8 @@ public class TwitterVisGui extends javax.swing.JFrame {
         clusterTextArea.setRows(5);
         clusterTextArea.setWrapStyleWord(true);
         clusterScrollPane.setViewportView(clusterTextArea);
+        javax.swing.text.DefaultCaret caret = (javax.swing.text.DefaultCaret) clusterTextArea.getCaret();
+        caret.setUpdatePolicy(javax.swing.text.DefaultCaret.NEVER_UPDATE);
 
         fileUrlTextField.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
         fileUrlTextField.setText("Choose a file by clicking \"Browse...\"");
@@ -124,11 +126,11 @@ public class TwitterVisGui extends javax.swing.JFrame {
 
         menuBar.add(fileMenu);
 
-        aboutMenu.setText("About");
-        aboutMenu.setFont(new java.awt.Font("Open Sans", 0, 15)); // NOI18N
-        aboutMenu.addActionListener(new java.awt.event.ActionListener() {
+        helpMenu.setText("Help");
+        helpMenu.setFont(new java.awt.Font("Open Sans", 0, 15)); // NOI18N
+        helpMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                aboutMenuActionPerformed(evt);
+                helpMenuActionPerformed(evt);
             }
         });
 
@@ -139,9 +141,9 @@ public class TwitterVisGui extends javax.swing.JFrame {
                 aboutMenuItemActionPerformed(evt);
             }
         });
-        aboutMenu.add(aboutMenuItem);
+        helpMenu.add(aboutMenuItem);
 
-        menuBar.add(aboutMenu);
+        menuBar.add(helpMenu);
 
         setJMenuBar(menuBar);
 
@@ -215,7 +217,6 @@ public class TwitterVisGui extends javax.swing.JFrame {
         String algo = algoComboBox.getSelectedItem().toString();
         clusterXml cluster = new clusterXml(algo);
         ArrayList <clusterObject> clusterObjects = new ArrayList<clusterObject>();
-        
         String fileUrl = fileUrlTextField.getText();
 
         try {
@@ -247,9 +248,9 @@ public class TwitterVisGui extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
-    private void aboutMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuActionPerformed
+    private void helpMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpMenuActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_aboutMenuActionPerformed
+    }//GEN-LAST:event_helpMenuActionPerformed
 
     private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItemActionPerformed
         AboutDialog aboutDialog = new AboutDialog(null, true);
@@ -326,7 +327,6 @@ catch (javax.swing.UnsupportedLookAndFeelException ex) {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu aboutMenu;
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JComboBox algoComboBox;
     private javax.swing.JLabel algoLabel;
@@ -336,6 +336,7 @@ catch (javax.swing.UnsupportedLookAndFeelException ex) {
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JTextField fileUrlTextField;
+    private javax.swing.JMenu helpMenu;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JButton runButton;
     private javax.swing.JTextField searchQueryTextField;

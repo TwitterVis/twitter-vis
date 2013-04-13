@@ -14,23 +14,21 @@ import java.util.ArrayList;
 
 public class ReadXMLFile {
 
-    public ReadXMLFile() {
-    }
-
     public String[][] returnTweets(String url) throws ParserConfigurationException, SAXException, IOException {
-        File fXmlFile = new File("src//core//master.xml");
-        //File fXmlFile = new File(url);
+        File fXmlFile = new File(url); // Path to XML file.
+
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         Document doc = dBuilder.parse(fXmlFile);
+        
         ArrayList<ArrayList<String>> arrayList = new ArrayList();
 
         doc.getDocumentElement().normalize();
 
         NodeList nList = doc.getElementsByTagName("document");
 
-        for (int temp = 0; temp < nList.getLength(); temp++) {
-            Node nNode = nList.item(temp);
+        for (int i = 0; i < nList.getLength(); i++) {
+            Node nNode = nList.item(i);
 
             if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                 Element eElement = (Element) nNode;
@@ -42,15 +40,17 @@ public class ReadXMLFile {
                 arrayList.add(innerList);
             }
         }
-        int size1 = arrayList.size();
-        System.out.println("array size: " + size1);
-        String tweets[][] = new String[size1][3];
-        for (int i = 0; i < size1; i++) {
+        
+        int numDocs = arrayList.size();
+        System.out.println("Number of documents: " + numDocs);
+        
+        String tweets[][] = new String[numDocs][3];
+        
+        for (int i = 0; i < numDocs; i++) {
             ArrayList<String> innerList = arrayList.get(i);
             tweets[i][0] = innerList.get(0);
             tweets[i][1] = innerList.get(1);
             tweets[i][2] = innerList.get(2);
-
         }
         return tweets;
     }
