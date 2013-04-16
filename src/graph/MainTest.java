@@ -6,7 +6,7 @@ package graph;
 
 /**
  *
- * @author Ross
+ * @author Ross Doherty
  */
 public class MainTest {
    public static void main(String[] args) {
