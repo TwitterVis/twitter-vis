@@ -61,7 +61,7 @@ public class HistogramTest extends JFrame {
 
         HistogramDataset result = new HistogramDataset();
         for (int i = 0; i < clusterObjects.size(); i++) {
-            value.add(clusterObjects.get(i).getNumDocuments());
+            value.add(clusterObjects.get(i).getNumberRetweets());
         }
         result.setType(HistogramType.RELATIVE_FREQUENCY);
 

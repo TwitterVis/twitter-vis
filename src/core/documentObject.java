@@ -21,6 +21,7 @@ public class documentObject {
     {
        return url; 
     }
+   
     
      public String getSnippet()
     {

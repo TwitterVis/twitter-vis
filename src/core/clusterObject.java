@@ -31,9 +31,21 @@ public class clusterObject {
     {
         return numDocs;
     }
+     public int getNumberRetweets()
+    {
+        int result=0;
+        for (int i = 0; i < documents.size(); i++) {
+            result+=Integer.parseInt(documents.get(i).url);
+        }
+       return result;
+    }
     public void printCluster()
     {
         System.out.println("Cluster Topic: "+clusterTopic+" Number Docs: "+numDocs);
+    }
+    public ArrayList<documentObject> getDocumentArray()
+    {
+        return documents;
     }
     
 }
