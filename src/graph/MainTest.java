@@ -10,7 +10,7 @@ package graph;
  */
 public class MainTest {
    public static void main(String[] args) {
-          PieChart demo = new PieChart("Comparison", "Which operating system are you using?");
+          PieChart demo = new PieChart("Comparison", "Example Title");
           demo.pack();
           demo.setVisible(true);
       }
