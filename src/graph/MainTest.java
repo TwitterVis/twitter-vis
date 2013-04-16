@@ -13,5 +13,9 @@ public class MainTest {
           PieChart demo = new PieChart("Comparison", "Example Title");
           demo.pack();
           demo.setVisible(true);
+          //
+          HistogramTest demo2 = new  HistogramTest("Comparison", "Example Title");
+          demo2.pack();
+          demo2.setVisible(true);
       }
 } 
