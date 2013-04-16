@@ -3,6 +3,7 @@ package gui;
 import core.clusterObject;
 import core.clusterXml;
 import core.documentObject;
+import graph.PieChart;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -222,6 +223,11 @@ public class TwitterVisGui extends javax.swing.JFrame {
                     rawOutputTextArea.append(" -- Document -- \n" + d.getSnippet() + "\n\n");
                 }
             }
+            
+            PieChart pieChart = new PieChart("Comparison", "Example Title");
+            pieChart.setSize(1366, 768);
+            pieChart.setVisible(true);
+            
         } catch (IOException ioe) {
             ioe.printStackTrace(System.out);
         } catch (ParserConfigurationException pce) {

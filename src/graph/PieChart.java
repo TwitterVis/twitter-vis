@@ -79,6 +79,7 @@ public class PieChart extends JFrame {
         plot.setStartAngle(290);
         plot.setDirection(Rotation.CLOCKWISE);
         plot.setForegroundAlpha(0.5f);
+        
         return chart;
 
     }
