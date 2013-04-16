@@ -1,25 +1,19 @@
 package gui;
 
-
 import core.clusterObject;
 import core.clusterXml;
 import core.documentObject;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JDialog;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.xml.parsers.ParserConfigurationException;
-import org.carrot2.core.Cluster;
 import org.xml.sax.SAXException;
 /**
- * @author Sean Treacy
  * @author Aaron Hastings
+ * @author Sean Treacy
  */
 public class TwitterVisGui extends javax.swing.JFrame {
 
@@ -59,11 +53,6 @@ public class TwitterVisGui extends javax.swing.JFrame {
 
         fileUrlTextField.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
         fileUrlTextField.setText("Choose a file by clicking \"Browse...\"");
-        fileUrlTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fileUrlTextFieldActionPerformed(evt);
-            }
-        });
 
         browseButton.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
         browseButton.setText("Browse...");
@@ -92,11 +81,6 @@ public class TwitterVisGui extends javax.swing.JFrame {
         searchQueryTextField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 searchQueryTextFieldMouseClicked(evt);
-            }
-        });
-        searchQueryTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchQueryTextFieldActionPerformed(evt);
             }
         });
         searchQueryTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -136,11 +120,6 @@ public class TwitterVisGui extends javax.swing.JFrame {
 
         helpMenu.setText("Help");
         helpMenu.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
-        helpMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                helpMenuActionPerformed(evt);
-            }
-        });
 
         aboutMenuItem.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
         aboutMenuItem.setText("About TweetVis");
@@ -256,22 +235,10 @@ public class TwitterVisGui extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
-    private void helpMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpMenuActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_helpMenuActionPerformed
-
     private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItemActionPerformed
         AboutDialog aboutDialog = new AboutDialog(null, true);
         aboutDialog.setVisible(true);
     }//GEN-LAST:event_aboutMenuItemActionPerformed
-
-    private void fileUrlTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileUrlTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fileUrlTextFieldActionPerformed
-
-    private void searchQueryTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchQueryTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_searchQueryTextFieldActionPerformed
 
     private void searchQueryTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchQueryTextFieldMouseClicked
         if (searchQueryTextField.getText().equals("Enter a search query..."))
